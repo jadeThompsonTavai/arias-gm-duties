@@ -7,6 +7,41 @@ function App() {
   const [timeLeft, setTimeLeft] = useState(25 * 60);
   const [isRunning, setIsRunning] = useState(false);
   const [isBreak, setIsBreak] = useState(false);
+  const [encouragement, setEncouragement] = useState("");
+
+  const workMessages = [
+    "Is this all you got?",
+    "This is not time for our GM to be slacking.",
+    "Stay Focused!",
+    "These papers, won't sign themselves.",
+  ];
+
+  const breakMessages = [
+    "There's more where that came from.",
+    "Rest up.",
+    "A well-deserved break.",
+    "See, it's not so bad",
+  ];
+
+  useEffect(() => {
+    let messageInterval: NodeJS.Timeout;
+
+    if(isRunning){
+      const messages = isBreak ? breakMessages : workMessages;
+      setEncouragement(messages[0]); //set first message
+
+      let index = 1;
+
+      messageInterval = setInterval(() => {
+        setEncouragement(messages[index]);
+        index = (index + 1) % messages.length;
+      }, 4000);
+    } else {
+      setEncouragement("");
+    }
+
+    return () => clearInterval(messageInterval);
+  }, [isRunning, isBreak]);
 
   //Countdown Timer
   useEffect(() => {
@@ -64,7 +99,7 @@ function App() {
       </div>
 
       {/* Here will display working animations instead of encouragement --> Can have character dialogue instead */}
-      <p>You got this!</p>
+      <p className={`encouragement-text ${isRunning ? "hidden" : ""}`}>{encouragement}</p>
 
       <h1 className="home-timer">{formatTime(timeLeft)}</h1>
 
