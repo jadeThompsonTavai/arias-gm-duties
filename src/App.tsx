@@ -99,7 +99,7 @@ function App() {
       </div>
 
       {/* Here will display working animations instead of encouragement --> Can have character dialogue instead */}
-      <p>{encouragement}</p>
+      <p className={`encouragement-text ${isRunning ? "hidden" : ""}`}>{encouragement}</p>
 
       <h1 className="home-timer">{formatTime(timeLeft)}</h1>
 
