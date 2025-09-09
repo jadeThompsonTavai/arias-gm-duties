@@ -7,6 +7,7 @@ function App() {
 
   const [timeLeft, setTimeLeft] = useState(25*60);
   const [isRunning, setIsRunning] = useState(false);
+  const [isBreak, setIsBreak] = useState(false);
 
   useEffect(() => {
     let timer: NodeJS.Timeout;
@@ -28,12 +29,18 @@ function App() {
 
   };
 
+  const switchMode = (breakMode: boolean) =>{
+    setIsBreak(breakMode);
+    setIsRunning(false);
+    setTimeLeft(breakMode ? 5 *60 : 25 * 60);
+  }
+
   const handleClick = () => {
     if(!isRunning) {
       setIsRunning(true);
     } else {
       setIsRunning(false);
-      setTimeLeft(25*60)
+      setTimeLeft(isBreak ? 5*60 : 25*60)
     }
   }
 
@@ -47,11 +54,12 @@ function App() {
 
     <div className="home-content">
       <div className = "home-controls">
-        <button className="image-button">Work</button>
-        <button className="image-button">Break</button>  
+        <button className="image-button" onClick = {() => switchMode(false)}>Work</button>
+        <button className="image-button" onClick={()=> switchMode(true)}>Break</button>  
       </div>
     </div>
 
+    {/* Here will display working animations instead of encouragement --> Can have character dialogue instead */}
     <p>You got this!</p>
 
     <h1 className = "home-timer">{formatTime(timeLeft)}</h1>
