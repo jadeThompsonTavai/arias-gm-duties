@@ -5,7 +5,7 @@ This project is based off the pomodoro timer created by lovesulei with her tutor
 
 ### Features from tutorial
 - [x] Timer for break mode and work mode
-- [x] Timer alerts when run out
+- [x] Timer alerts when ended
 - [x] Timer start button changes to pause when timer is running
 - [ ] Cute animation that plays related to each mode
 
