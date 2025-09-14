@@ -49,15 +49,15 @@ body {
   font-size: 1.25rem;
   color: #b94e98;
   margin-bottom: 0.5rem;
-  animation: fadeIn 1s ease-in-out;
-  transition: opacity 0.8s ease;
+  /* animation: fadeIn 1s ease-in-out; */
+  /* transition: opacity 0.8s ease; */
 }
 
 .encouragement-text .break-text {
   color: #57a4ec;
 }
 
-.encouragement-text.hidden {
+.encouragement-text .hidden {
   opacity: 0;
 }
 
@@ -84,7 +84,12 @@ body {
 .home-timer {
   font-size: 60px;
   color: #d77bba;
-  margin: 0;
+  padding: 0;
+  z-index: 1;
+  border-radius: 0;
+  margin-top: 50px;
+  position:fixed;
+  
 }
 
 .timer-blue {
@@ -92,7 +97,12 @@ body {
 }
 
 .gif-image {
-  height: 100px;
+  height: 150px;
+}
+
+.container-to-be-behind {
+  position: absolute;
+  bottom: 101px;
 }
 
 .home-button {

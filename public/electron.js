@@ -6,8 +6,8 @@ const path = require('path');
 function createMainWindow() {
     const mainWindow = new BrowserWindow({
         title: 'Arias GM Duties',
-        width: 400,
-        height: 430
+        width: 430,
+        height: 500
     });
 
     const startUrl = url.format({

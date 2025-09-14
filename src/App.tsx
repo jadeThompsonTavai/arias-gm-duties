@@ -9,50 +9,18 @@ import breakBtnClicked from "./assets/break-blue-clicked.png";
 import closeBtn from "./assets/close.png";
 import playImg from "./assets/play.png";
 import resetImg from "./assets/reset.png";
+import workGif from "./assets/work.gif";
 
 
 function App() {
   const [timeLeft, setTimeLeft] = useState(25 * 60);
   const [isRunning, setIsRunning] = useState(false);
   const [isBreak, setIsBreak] = useState(false);
-  const [encouragement, setEncouragement] = useState("");
   const [workButtonImage, setWorkButtonImage] = useState(workBtn);
   const [breakButtonImage, setBreakButtonImage] = useState(breakBtn);
   const [image, setImage] = useState(playImg);
+  const [gifImage, setGifImage] = useState(workGif);
 
-  const workMessages = [
-    "Is this all you got?",
-    "This is not time for our GM to be slacking.",
-    "Stay Focused!",
-    "These papers, won't sign themselves.",
-  ];
-
-  const breakMessages = [
-    "There's more where that came from.",
-    "Rest up.",
-    "A well-deserved break.",
-    "See, it's not so bad",
-  ];
-
-  useEffect(() => {
-    let messageInterval: NodeJS.Timeout;
-
-    if(isRunning){
-      const messages = isBreak ? breakMessages : workMessages;
-      setEncouragement(messages[0]); //set first message
-
-      let index = 1;
-
-      messageInterval = setInterval(() => {
-        setEncouragement(messages[index]);
-        index = (index + 1) % messages.length;
-      }, 4000); //4 sec interval
-    } else {
-      setEncouragement("");
-    }
-
-    return () => clearInterval(messageInterval);
-  }, [isRunning, isBreak]);
 
   //Countdown Timer
   useEffect(() => {
@@ -122,15 +90,12 @@ function App() {
           </button>
         </div>
 
-          {/* Here will display working animations instead of encouragement --> Can have character dialogue instead */}
-      <p className={`encouragement-text ${isRunning ? "hidden" : ""} ${isBreak ? "break-text" : ""}`}>
-        {encouragement}
-      </p>
-
-      
       <h1 className={timerClass}>{formatTime(timeLeft)}</h1>
-      <img src={closeBtn} alt="Timer Status" className="gif-image"/><p>Will be replaced with gifs</p>
-
+      
+      <div className = "container-to-be-behind">
+        <img src={gifImage} alt="Timer Status" className="gif-image"/>
+      </div>
+      
       <button className="home-button" onClick={handleClick}>
         <img src={playImg} />
       </button>
