@@ -28,7 +28,6 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 12px;
   box-sizing: border-box;
   text-align: center;
 }
@@ -75,6 +74,19 @@ body {
   background: none;
   border: none;
   cursor: pointer;
+}
+
+.soundButton {
+  background: transparent;
+  position: absolute;
+  top: 45px;
+  right: 15px;
+  border: none;
+  cursor: pointer;
+}
+
+.soundButton img {
+  height: 30px;
 }
 
 .image-button img {

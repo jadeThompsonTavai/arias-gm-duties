@@ -19,3 +19,13 @@ This project is based off the pomodoro timer created by lovesulei with her tutor
 
 
 
+## Music Used
+Work Time:
+Music track: Rose by Lukrembo
+Source: https://freetouse.com/music
+Copyright Free Music (Free Download)
+
+Break Time: 
+Music track: Dreaming by Pufino
+Source: https://freetouse.com/music
+Free Music No Copyright (Safe)

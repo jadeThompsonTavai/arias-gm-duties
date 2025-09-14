@@ -11,17 +11,25 @@ import playImg from "./assets/play.png";
 import resetImg from "./assets/reset.png";
 import workGif from "./assets/work.gif";
 import bellSound from "./assets/bell.mp3";
+import workSound from "./assets/workSound.mp3";
+import breakSound from "./assets/breakSound.mp3";
+import soundOn from "./assets/soundOn.png";
+import soundOff from "./assets/soundOff.png";
 
 
 function App() {
   const [timeLeft, setTimeLeft] = useState(25 * 60);
   const [isRunning, setIsRunning] = useState(false);
   const [isBreak, setIsBreak] = useState(false);
-  const [workButtonImage, setWorkButtonImage] = useState(workBtn);
+  const [workButtonImage, setWorkButtonImage] = useState(workBtnClicked);
   const [breakButtonImage, setBreakButtonImage] = useState(breakBtn);
   const [image, setImage] = useState(playImg);
   const [gifImage, setGifImage] = useState(workGif);
   const bellAudio = new Audio(bellSound);
+  const workAudio = new Audio(workSound);
+  const breakAudio = new Audio(breakSound);
+  const [isAudio, setIsAudio] = useState(true);
+  const [music, setMusic] = useState(workAudio);
 
 
   //Countdown Timer
@@ -64,29 +72,50 @@ function App() {
     setWorkButtonImage(breakMode ? workBtn : workBtnClicked);
     setIsRunning(false);
     setTimeLeft(breakMode ? 5 * 60 : 25 * 60);
+    setMusic(breakMode ? breakAudio : workAudio);
   };
 
   const handleClick = () => {
     if (!isRunning) {
       setIsRunning(true);
       setImage(resetImg);
+      if(isAudio){
+        music.play();
+      }
     } else {
       setIsRunning(false);
       setImage(playImg);
       setTimeLeft(isBreak ? 5 * 60 : 25 * 60);
+      music.pause();
     }
   };
 
+  //close electron with button
+  const handleCloseClick = () => {
+    console.log("close btn pressed!");
+  if (window.electronAPI?.closeApp) {
+    window.electronAPI.closeApp();
+  } else {
+    console.warn("Electron API not available");
+  }
+}
+
+const handleAudio = () => {
+ isAudio ? setIsAudio(false) : setIsAudio(true);
+}
  
   const containerClass = `home-container ${isBreak ? "bg-blue" : ""}`;
   const timerClass = `home-timer ${isBreak ? "timer-blue": ""}`;
-
+  music.volume = 0.1;
 
   return (
     <div className={containerClass} style={{ position: "relative" }}>
       <div>
-        <button className="closeButton">
+        <button className="closeButton" onClick={handleCloseClick}>
           <img src={closeBtn} alt="close"/>
+        </button>
+        <button className="soundButton" onClick={handleAudio}>
+          <img src = {isAudio ? soundOn : soundOff} alt="sound toggle" />
         </button>
       </div>
 
