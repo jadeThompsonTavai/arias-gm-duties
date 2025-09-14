@@ -10,6 +10,7 @@ import closeBtn from "./assets/close.png";
 import playImg from "./assets/play.png";
 import resetImg from "./assets/reset.png";
 import workGif from "./assets/work.gif";
+import bellSound from "./assets/bell.mp3";
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
   const [breakButtonImage, setBreakButtonImage] = useState(breakBtn);
   const [image, setImage] = useState(playImg);
   const [gifImage, setGifImage] = useState(workGif);
+  const bellAudio = new Audio(bellSound);
 
 
   //Countdown Timer
@@ -32,6 +34,17 @@ function App() {
     }
     return () => clearInterval(timer);
   }, [isRunning, timeLeft]);
+
+  useEffect(() => {
+    if(timeLeft === 0 && isRunning){
+      bellAudio.play().catch(err => {
+        console.log("Audio failed to play:", err);
+      })
+      setIsRunning(false);
+      switchMode(isBreak ? false : true);
+
+    }
+  });
 
   const formatTime = (seconds: number): string => {
     const m = Math.floor(seconds / 60)
@@ -47,13 +60,8 @@ function App() {
 
   const switchMode = (breakMode: boolean) => {
     setIsBreak(breakMode);
-    if(!breakMode){
-      setWorkButtonImage(workBtnClicked);
-      setBreakButtonImage(breakBtn);
-    } else {
-      setWorkButtonImage(workBtn);
-      setBreakButtonImage(breakBtnClicked);
-    }
+    setBreakButtonImage(breakMode ? breakBtnClicked : breakBtn);
+    setWorkButtonImage(breakMode ? workBtn : workBtnClicked);
     setIsRunning(false);
     setTimeLeft(breakMode ? 5 * 60 : 25 * 60);
   };
@@ -61,8 +69,10 @@ function App() {
   const handleClick = () => {
     if (!isRunning) {
       setIsRunning(true);
+      setImage(resetImg);
     } else {
       setIsRunning(false);
+      setImage(playImg);
       setTimeLeft(isBreak ? 5 * 60 : 25 * 60);
     }
   };
@@ -97,7 +107,7 @@ function App() {
       </div>
       
       <button className="home-button" onClick={handleClick}>
-        <img src={playImg} />
+        <img src={image} />
       </button>
       </div>
 
