@@ -1,47 +1,28 @@
 import React, { useState, useEffect } from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import { relative } from "path";
+
+import workBtn from "./assets/work-blue.png";
+import workBtnClicked from "./assets/work-blue-clicked.png";
+import breakBtn from "./assets/break-blue.png";
+import breakBtnClicked from "./assets/break-blue-clicked.png";
+import closeBtn from "./assets/close.png";
+import playImg from "./assets/play.png";
+import resetImg from "./assets/reset.png";
+import workGif from "./assets/work.gif";
+import bellSound from "./assets/bell.mp3";
+
 
 function App() {
   const [timeLeft, setTimeLeft] = useState(25 * 60);
   const [isRunning, setIsRunning] = useState(false);
   const [isBreak, setIsBreak] = useState(false);
-  const [encouragement, setEncouragement] = useState("");
+  const [workButtonImage, setWorkButtonImage] = useState(workBtn);
+  const [breakButtonImage, setBreakButtonImage] = useState(breakBtn);
+  const [image, setImage] = useState(playImg);
+  const [gifImage, setGifImage] = useState(workGif);
+  const bellAudio = new Audio(bellSound);
 
-  const workMessages = [
-    "Is this all you got?",
-    "This is not time for our GM to be slacking.",
-    "Stay Focused!",
-    "These papers, won't sign themselves.",
-  ];
-
-  const breakMessages = [
-    "There's more where that came from.",
-    "Rest up.",
-    "A well-deserved break.",
-    "See, it's not so bad",
-  ];
-
-  useEffect(() => {
-    let messageInterval: NodeJS.Timeout;
-
-    if(isRunning){
-      const messages = isBreak ? breakMessages : workMessages;
-      setEncouragement(messages[0]); //set first message
-
-      let index = 1;
-
-      messageInterval = setInterval(() => {
-        setEncouragement(messages[index]);
-        index = (index + 1) % messages.length;
-      }, 4000);
-    } else {
-      setEncouragement("");
-    }
-
-    return () => clearInterval(messageInterval);
-  }, [isRunning, isBreak]);
 
   //Countdown Timer
   useEffect(() => {
@@ -53,6 +34,17 @@ function App() {
     }
     return () => clearInterval(timer);
   }, [isRunning, timeLeft]);
+
+  useEffect(() => {
+    if(timeLeft === 0 && isRunning){
+      bellAudio.play().catch(err => {
+        console.log("Audio failed to play:", err);
+      })
+      setIsRunning(false);
+      switchMode(isBreak ? false : true);
+
+    }
+  });
 
   const formatTime = (seconds: number): string => {
     const m = Math.floor(seconds / 60)
@@ -68,6 +60,8 @@ function App() {
 
   const switchMode = (breakMode: boolean) => {
     setIsBreak(breakMode);
+    setBreakButtonImage(breakMode ? breakBtnClicked : breakBtn);
+    setWorkButtonImage(breakMode ? workBtn : workBtnClicked);
     setIsRunning(false);
     setTimeLeft(breakMode ? 5 * 60 : 25 * 60);
   };
@@ -75,37 +69,50 @@ function App() {
   const handleClick = () => {
     if (!isRunning) {
       setIsRunning(true);
+      setImage(resetImg);
     } else {
       setIsRunning(false);
+      setImage(playImg);
       setTimeLeft(isBreak ? 5 * 60 : 25 * 60);
     }
   };
 
+ 
+  const containerClass = `home-container ${isBreak ? "bg-blue" : ""}`;
+  const timerClass = `home-timer ${isBreak ? "timer-blue": ""}`;
+
+
   return (
-    <div style={{ position: "relative" }}>
+    <div className={containerClass} style={{ position: "relative" }}>
       <div>
-        <button className="closeButton">Close</button>
+        <button className="closeButton">
+          <img src={closeBtn} alt="close"/>
+        </button>
       </div>
 
       <div className="home-content">
         <div className="home-controls">
-          <button className="image-button" onClick={() => switchMode(false)}>
-            Work
+          <button className="image-button" id="work-button" onClick={() => switchMode(false)}>
+            <img src={workButtonImage} alt="work" />
           </button>
-          <button className="image-button" onClick={() => switchMode(true)}>
-            Break
+          <button className="image-button" id="break-button" onClick={() => switchMode(true)}>
+            <img src={breakButtonImage} alt="break" />
           </button>
         </div>
+
+      <h1 className={timerClass}>{formatTime(timeLeft)}</h1>
+      
+      <div className = "container-to-be-behind">
+        <img src={gifImage} alt="Timer Status" className="gif-image"/>
+      </div>
+      
+      <button className="home-button" onClick={handleClick}>
+        <img src={image} />
+      </button>
       </div>
 
-      {/* Here will display working animations instead of encouragement --> Can have character dialogue instead */}
-      <p className={`encouragement-text ${isRunning ? "hidden" : ""}`}>{encouragement}</p>
+    
 
-      <h1 className="home-timer">{formatTime(timeLeft)}</h1>
-
-      <button className="home-button" onClick={handleClick}>
-        Start
-      </button>
     </div>
   );
 }

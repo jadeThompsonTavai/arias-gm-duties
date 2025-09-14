@@ -1,38 +1,131 @@
-.App {
+/*
+STYLES
+PINK: #d77bba
+BLUE: #55e2ec
+WHITE: #fffffe
+*/
+
+@font-face {
+  font-family: 'Retrograde-Regular';
+  src: url('./assets/Retrograde-Regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  font-family: 'Retrograde-Regular', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+
+.home-container {
+  width: 400px;
+  height: 430px;
+  background-image: url('./assets/bg-pink.png');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  box-sizing: border-box;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.home-content {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+  padding-top: 60px;
+  padding-bottom: 20px;
+  box-sizing: border-box;
+}
+
+.encouragement-text {
+  font-size: 1.25rem;
+  color: #b94e98;
+  margin-bottom: 0.5rem;
+  /* animation: fadeIn 1s ease-in-out; */
+  /* transition: opacity 0.8s ease; */
+}
+
+.encouragement-text .break-text {
+  color: #57a4ec;
+}
+
+.encouragement-text .hidden {
+  opacity: 0;
+}
+
+.bg-blue {
+  background-image: url('./assets/bg-blue.png');
+}
+
+.home-controls {
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  margin: 0;
 }
 
-.App-link {
-  color: #61dafb;
+.image-button {
+  background: none;
+  border: none;
+  cursor: pointer;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.image-button img {
+  width: 100px;
 }
+
+.home-timer {
+  font-size: 60px;
+  color: #d77bba;
+  padding: 0;
+  z-index: 1;
+  border-radius: 0;
+  margin-top: 50px;
+  position:fixed;
+  
+}
+
+.timer-blue {
+  color: #55e2ec;
+}
+
+.gif-image {
+  height: 150px;
+}
+
+.container-to-be-behind {
+  position: absolute;
+  bottom: 101px;
+}
+
+.home-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.home-button img {
+  width: 60px;
+}
+
+.closeButton {
+  background: transparent;
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  border: none;
+  cursor: pointer;
+}
+
+.closeButton img{
+  height:24px;
+  width:24px;
+}
+
