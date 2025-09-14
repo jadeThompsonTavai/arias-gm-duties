@@ -67,10 +67,12 @@ function App() {
   };
 
   const switchMode = (breakMode: boolean) => {
+    music.pause();
     setIsBreak(breakMode);
     setBreakButtonImage(breakMode ? breakBtnClicked : breakBtn);
     setWorkButtonImage(breakMode ? workBtn : workBtnClicked);
     setIsRunning(false);
+    setImage(playImg);
     setTimeLeft(breakMode ? 5 * 60 : 25 * 60);
     setMusic(breakMode ? breakAudio : workAudio);
   };
