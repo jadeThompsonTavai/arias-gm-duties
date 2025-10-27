@@ -13,6 +13,7 @@ This project is based off the pomodoro timer created by lovesulei with her tutor
 ### Features I want to add:
 - [x] Auto switches to other mode when timer runs out
 - [x] Music plays when timer is running
+- [x] Option to toggle music on/off
 - [ ] Option to decide how long each timer will be
 
 

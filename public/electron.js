@@ -12,6 +12,7 @@ function createMainWindow() {
         height: 430,
         frame: false,
         titleBarStyle: 'hidden',
+        icon: path.join(__dirname, 'logoblack.png'),
         webPreferences: {
             preload: path.join(__dirname, "preload.js"), // Path to preload script
             contextIsolation: true,   // Keeps context isolated for security
@@ -25,8 +26,6 @@ function createMainWindow() {
         slashes: true
     });
 
-    //removing top buttons and menus
-    // mainWindow.setMenuBarVisibility(false);
 
     mainWindow.loadURL(startUrl);
 

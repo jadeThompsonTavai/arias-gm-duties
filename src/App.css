@@ -18,6 +18,14 @@ body {
   padding: 0;
 }
 
+.draggable {
+  width: 400px;
+  height: 40px;
+  position: absolute;
+  top:0;
+  -webkit-app-region: drag;
+
+}
 
 .home-container {
   width: 400px;
@@ -83,6 +91,7 @@ body {
   right: 15px;
   border: none;
   cursor: pointer;
+  -webkit-app-region:no-drag;
 }
 
 .soundButton img {
@@ -134,6 +143,7 @@ body {
   right: 7px;
   border: none;
   cursor: pointer;
+  -webkit-app-region:no-drag;
 }
 
 .closeButton img{

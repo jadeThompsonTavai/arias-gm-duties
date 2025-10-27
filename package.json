@@ -19,7 +19,10 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "reactStart": "react-scripts start",
     "electron": "electron public/electron.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -30,16 +33,19 @@
     "productName": "WorkFaster",
     "files": [
       "build/**/*",
-      "public/electron.js"
+      "public/electron.js",
+      "public/**/*"
     ],
     "directories": {
       "buildResources": "assets"
     },
     "mac": {
-      "target": "dmg"
+      "target": "dmg",
+      "icon": "./public/src/assets/arcanamoon512.png"
     },
     "win": {
-      "target": "nsis"
+      "target": "nsis",
+      "icon": "./public/src/assets/arcanamoon512.png"
     },
     "linux": {
       "target": "AppImage"

@@ -112,10 +112,11 @@ const handleAudio = () => {
 
   return (
     <div className={containerClass} style={{ position: "relative" }}>
-      <div>
-        <button className="closeButton" onClick={handleCloseClick}>
+      <div className="draggable"><button className="closeButton" onClick={handleCloseClick}>
           <img src={closeBtn} alt="close"/>
-        </button>
+        </button></div>
+      <div>
+        
         <button className="soundButton" onClick={handleAudio}>
           <img src = {isAudio ? soundOn : soundOff} alt="sound toggle" />
         </button>
