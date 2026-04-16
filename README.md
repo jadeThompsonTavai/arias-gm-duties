@@ -7,7 +7,7 @@ This project is based off the pomodoro timer created by lovesulei with her tutor
 - [x] Timer for break mode and work mode
 - [x] Timer alerts when ended
 - [x] Timer start button changes to pause when timer is running
-- [ ] Cute animation that plays related to each mode
+- [x] Cute animation that plays related to each mode
 
       
 ### Features I want to add:
@@ -15,6 +15,8 @@ This project is based off the pomodoro timer created by lovesulei with her tutor
 - [x] Music plays when timer is running
 - [ ] Option to decide how long each timer will be
 
+### Currently working on:
+- [ ] Redoing the animations, changing the style from pixel art to a smoother cartoon style
 
 
 
